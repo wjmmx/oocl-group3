@@ -62,5 +62,25 @@ public class User {
 		}
 		return success;
 	}
+	public static Boolean reserveSchedules(ArrayList<Schedule> list, String from, String to, String day) {
+		Boolean success = false;
+
+		for(Schedule l:list) {
+			
+			if(l.getFromHour().equals(from) && l.getToHour().equals(to) && l.getDay().equals(day)) { 
+				if(!l.isReserved) {
+					l.setIsReserved(true);;
+					success=true;
+					System.out.println("time: " + from + " - " + to + " is reserved succesfully!" );
+				}
+				else {
+					System.out.println("reservation failed");
+				}
+				
+				break;
+			}
+		}
+		return success;
+	}
 
 }
