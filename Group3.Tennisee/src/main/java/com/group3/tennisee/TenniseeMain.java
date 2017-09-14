@@ -74,9 +74,29 @@ public class TenniseeMain {
 	}
 	
 	public static void viewSchedules() {
-		
+		String [] day = {"A Monday\t|", "B Tuesday\t|", "C Wednesday\t|" , "D Thursday\t|", "E Friday\t|", "F Saturday\t|", "G Sunday\t|"} ;
+		boolean [][] a;
+	    int row = 8;
+	    int col = 7;
+	    a = new boolean [row][col];
+
+	    System.out.print("\t\t\t"); //print the spacer for the row numbers
+	    for (int i = 1; i <= col; i++){
+	         System.out.print(i + "\t"); //print the column number
+	    	
+	    }
+
+	    for (int i = 1; i<a.length;i++){ 
+	       // System.out.print("\n" + i + " "); //new line plus row number
+	    	System.out.print("\n" + day[i-1]);
+	        for (int j = 1; j<a[0].length;j++){
+	            a[i][j] = true; 
+	           
+	        }
+	    }
 	}
 	public static void reserveSchedule() {
+		
 	}
 
 }
