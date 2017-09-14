@@ -7,11 +7,11 @@ public class Schedule {
 	String fromHour;
 	String toHour;
 	int isReserve;
-	public Schedule(String day,String fromHour,String toHour) {
+	public Schedule(String day,String fromHour,String toHour, int res) {
 		this.day = day;
 		this.fromHour = fromHour;
 		this.toHour = toHour;
-		isReserve=0;
+		isReserve=res;
 		
 	}
 	

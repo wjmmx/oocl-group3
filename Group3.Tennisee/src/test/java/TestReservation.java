@@ -16,9 +16,9 @@ public class TestReservation {
 	public void createScheduleList() {
 		list = new ArrayList();
 		
-		list.add(new Schedule("Monday","9:00","10:00"));
-		list.add(new Schedule("Monday","10:00","11:00"));
-		list.add(new Schedule("Monday","11:00","12:00"));
+		list.add(new Schedule("Monday","9:00","11:00", 0));
+		list.add(new Schedule("Monday","11:00","13:00", 1));
+		list.add(new Schedule("Monday","13:00","15:00", 0));
 		
 	}
 	@Test
@@ -29,8 +29,9 @@ public class TestReservation {
 	@Test
 	public void testReservation() {
 		//fail("Not yet implemented");
-		Assert.assertEquals(true, User.reserveSchedules(list, "9:00", "10:00"));
-		Assert.assertEquals(false, User.reserveSchedules(list, "8:00", "9:00"));
+		Assert.assertEquals(true, User.reserveSchedules(list, "9:00", "11:00"));
+		Assert.assertEquals(false, User.reserveSchedules(list, "11:00", "13:00"));
+		Assert.assertEquals(true, User.reserveSchedules(list, "13:00", "15:00"));
 	}
 
 }

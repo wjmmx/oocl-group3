@@ -53,6 +53,9 @@ public class User {
 					success=true;
 					System.out.println("time: " + from + " - " + to + " is reserved succesfully!" );
 				}
+				else {
+					System.out.println("reservation failed");
+				}
 				
 				break;
 			}
