@@ -47,6 +47,23 @@ public class Storage {
 		return null;
 	}
 	
+	public Schedule getScheduleListByCodeAndCourt(String code, String courtCode) {
+		for(Schedule s: this.scheduleList) {
+			if(code.isEmpty()) {
+				System.out.println("null input");
+				return null;	
+			} 
+			else if(s.code.equalsIgnoreCase(code) && s.courtCode.equalsIgnoreCase(courtCode)) {
+				 return s;
+			}
+			else {
+				System.out.println("No such schedule!");
+				return null;
+			} 
+		}
+		return null;
+	}
+	
 //	public Schedule getScheduleListByDate(String day) {
 //		return new Schedule();
 //	}
