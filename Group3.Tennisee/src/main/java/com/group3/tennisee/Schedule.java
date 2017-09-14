@@ -9,7 +9,7 @@ public class Schedule {
 	public Schedule(String day,String fromHour,String toHour) {
 		this.day = day;
 		this.fromHour = fromHour;
-		this.toHour = this.toHour;
+		this.toHour = toHour;
 		
 	}
 	

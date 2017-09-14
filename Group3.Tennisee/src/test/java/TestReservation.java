@@ -30,6 +30,7 @@ public class TestReservation {
 	public void testReservation() {
 		//fail("Not yet implemented");
 		Assert.assertEquals(true, User.reserveSchedules(list, "9:00", "10:00"));
+		Assert.assertEquals(false, User.reserveSchedules(list, "8:00", "9:00"));
 	}
 
 }

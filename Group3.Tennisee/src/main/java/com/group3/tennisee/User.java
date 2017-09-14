@@ -46,10 +46,11 @@ public class User {
 		Boolean success = false;
 
 		for(Schedule l:list) {
+			
 			if(l.getFromHour().equals(from) && l.getToHour().equals(to)) { 
 				success=true;
 				break;
-			};
+			}
 		}
 		return success;
 	}
