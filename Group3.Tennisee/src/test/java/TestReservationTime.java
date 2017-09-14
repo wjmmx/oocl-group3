@@ -33,13 +33,13 @@ public class TestReservationTime {
 	}
 
 	@Test
-	public void testIsFifteenMinutes() {
+	public void testIsMoreThenFifteenMinutes() {
 		code = "A2";
 		courtCode = "B";
 		
 		Schedule sched = store.getScheduleListByCodeAndCourt(code, courtCode);
 		String fromTime = sched.getFromHour();
-		String currTime = "10:49";
+		String currTime = "08:00";
 		SimpleDateFormat date = new SimpleDateFormat("HH:mm");
 		
 		try{
@@ -47,7 +47,7 @@ public class TestReservationTime {
 			Date currDate = date.parse(currTime);
 			long diffMinutes = getTimeDiffInMinute(fromDate, currDate);
 			System.out.println(diffMinutes);
-			assertFalse(isWithinFifteenMinuteReservation(diffMinutes));
+			assertTrue(isWithinFifteenMinuteReservation(diffMinutes));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
@@ -59,7 +59,7 @@ public class TestReservationTime {
 		courtCode = "A";
 		
 		Schedule sched = store.getScheduleListByCodeAndCourt(code, courtCode);
-		String currTime = getCurrentTime();
+		String currTime = "10:48";
 		String fromTime = sched.getFromHour();
 		SimpleDateFormat date = new SimpleDateFormat("HH:mm");
 		
@@ -68,7 +68,7 @@ public class TestReservationTime {
 			Date currDate = date.parse(currTime);
 			long diffMinutes = getTimeDiffInMinute(fromDate, currDate);
 			
-			assertTrue(isWithinFifteenMinuteReservation(diffMinutes));
+			assertFalse(isWithinFifteenMinuteReservation(diffMinutes));
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
