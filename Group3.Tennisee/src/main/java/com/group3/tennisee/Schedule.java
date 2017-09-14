@@ -1,14 +1,18 @@
 package com.group3.tennisee;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Schedule {
 	String code;
 	String day;
 	String fromHour;
 	String toHour;
-	int isPaid;
-	int isReserve;
+	boolean isPaid;
+	boolean isReserved;
 	String courtCode;
 	
 	public Schedule(String code, String courtCode, String day,String fromHour,String toHour) {
@@ -17,10 +21,8 @@ public class Schedule {
 		this.toHour = toHour;
 		this.courtCode = courtCode;
 		this.code = code;
-		this.isReserve=0;
-		this.isPaid=0;
-		
-		
+		this.isReserved=false;
+		this.isPaid=false;	
 	}
 	
 	public String getCode() {
@@ -55,20 +57,20 @@ public class Schedule {
 		this.toHour = toHour;
 	}
 
-	public int getIsPaid() {
+	public boolean getIsPaid() {
 		return isPaid;
 	}
 
-	public void setIsPaid(int isPaid) {
+	public void setIsPaid(boolean isPaid) {
 		this.isPaid = isPaid;
 	}
 
-	public int getIsReserve() {
-		return isReserve;
+	public boolean getIsReserved() {
+		return isReserved;
 	}
 
-	public void setIsReserve(int isReserve) {
-		this.isReserve = isReserve;
+	public void setIsReserved(boolean isReserved) {
+		this.isReserved = isReserved;
 	}
 
 	public String getCourtCode() {
@@ -84,5 +86,34 @@ public class Schedule {
 		return list;
 	}
 	
+	public static String reserveSchedule(String code) {
+		
+		return "";
+	}
 	
+	public static boolean reserveSchedule(List<Schedule> schedules) {
+
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String code="";
+		try {
+		System.out.println("\nEnter code to reserve schedule: ");
+			code = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		for(Schedule schedule : schedules) {
+			if(schedule.getCode().equals(code)) {
+				if(schedule.getIsReserved()) {
+					System.out.println("Schedule is already reserved, please select another option.");
+					return false;
+				}
+				
+				schedule.setIsReserved(true);
+				System.out.println("Schedule has been successfully reserved.");
+				return true;
+			}
+		}
+		return false;
+	}
 }
