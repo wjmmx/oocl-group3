@@ -39,11 +39,8 @@ public class Storage {
 				System.out.println("null input");
 				return null;	
 			} 
-			else if(s.getCourtCode().equalsIgnoreCase(courtCode)) {
-				System.out.println(s.getIsReserved());
-				if(!s.getIsReserved()) {
+			else if(s.getCourtCode().equalsIgnoreCase(courtCode) && !s.getIsReserved()) {
 					 resultList.add(s);
-				}
 			}
 		}
 		if(resultList.size() == 0) {
@@ -54,12 +51,12 @@ public class Storage {
 	}
 	
 	public Schedule getScheduleListByCodeAndCourt(String code, String courtCode) {
-		for(Schedule s: this.scheduleList) {
-			if(code.isEmpty()) {
+		for(Schedule s: getScheduleList()) {
+			if(code.isEmpty() && courtCode.isEmpty()) {
 				System.out.println("null input");
 				return null;	
 			} 
-			else if(s.code.equalsIgnoreCase(code) && s.courtCode.equalsIgnoreCase(courtCode)) {
+			else if(s.getCode().equalsIgnoreCase(code) && s.getCourtCode().equalsIgnoreCase(courtCode)&& !s.getIsReserved()) {
 				 return s;
 			}
 			else {
