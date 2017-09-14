@@ -186,9 +186,9 @@ public class Storage {
 			} 
 			else if(s.getCode().equalsIgnoreCase(code) && s.getCourtCode().equalsIgnoreCase(courtCode)&& !s.getIsReserved()) {
 				 sched = s;
+				 break;
 			}
 		}
-		System.out.println("No such schedule!");
 		return sched;
 	}
 	
