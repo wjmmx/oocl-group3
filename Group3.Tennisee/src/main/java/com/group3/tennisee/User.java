@@ -48,8 +48,8 @@ public class User {
 		for(Schedule l:list) {
 			
 			if(l.getFromHour().equals(from) && l.getToHour().equals(to)) { 
-				if(l.isReserve==0) {
-					l.isReserve=1;
+				if(!l.isReserved) {
+					l.setIsReserved(true);
 					success=true;
 					System.out.println("time: " + from + " - " + to + " is reserved succesfully!" );
 				}
