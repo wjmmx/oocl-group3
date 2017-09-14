@@ -11,11 +11,15 @@ public class Schedule {
 	int isReserve;
 	String courtCode;
 	
-	public Schedule(String day,String fromHour,String toHour, int res) {
+	public Schedule(String code, String courtCode, String day,String fromHour,String toHour) {
 		this.day = day;
 		this.fromHour = fromHour;
 		this.toHour = toHour;
-		isReserve=res;
+		this.courtCode = courtCode;
+		this.code = code;
+		this.isReserve=0;
+		this.isPaid=0;
+		
 		
 	}
 	
@@ -77,22 +81,8 @@ public class Schedule {
 
 	public static ArrayList getSchedules() {
 		ArrayList list = new ArrayList();
-		
 		return list;
 	}
 	
-	public static ArrayList createScheduleDummy() {
-		ArrayList list = new ArrayList();
-		
-		list = new ArrayList();
-		list.add(new Schedule("Monday","9:00","11:00", 0));
-		list.add(new Schedule("Monday","11:00","13:00", 1));
-		list.add(new Schedule("Monday","13:00","15:00", 0));
-		list.add(new Schedule("Monday","13:00","15:00", 0));
-		list.add(new Schedule("Monday","13:00","15:00", 0));
-		list.add(new Schedule("Tuesday","13:00","15:00", 0));
-		return list;
-	}
-
 	
 }

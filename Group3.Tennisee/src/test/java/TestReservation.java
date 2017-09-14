@@ -8,18 +8,17 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.group3.tennisee.Schedule;
+import com.group3.tennisee.Storage;
 import com.group3.tennisee.User;
 
 public class TestReservation {
 	ArrayList list;
+	Storage store;
 	@Before
 	public void createScheduleList() {
+		store = new Storage();
 		list = new ArrayList();
-		
-		list.add(new Schedule("Monday","9:00","11:00", 0));
-		list.add(new Schedule("Monday","11:00","13:00", 1));
-		list.add(new Schedule("Monday","13:00","15:00", 0));
-		
+		list = store.getScheduleList();
 	}
 	@Test
 	public void testViewSchedules() {

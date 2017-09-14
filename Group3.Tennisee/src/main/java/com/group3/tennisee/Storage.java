@@ -47,8 +47,8 @@ public class Storage {
 		return null;
 	}
 	
-	public Schedule getScheduleListByDate(String day) {
-		return new Schedule();
-	}
+//	public Schedule getScheduleListByDate(String day) {
+//		return new Schedule();
+//	}
 	
 }

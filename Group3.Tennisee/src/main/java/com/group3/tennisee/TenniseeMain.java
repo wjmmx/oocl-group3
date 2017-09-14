@@ -10,9 +10,7 @@ public class TenniseeMain {
 		int option = 0;
 		ArrayList list = new ArrayList();
 		
-		list.add(new Schedule("Monday","9:00","11:00", 0));
-		list.add(new Schedule("Monday","11:00","13:00", 1));
-		list.add(new Schedule("Monday","13:00","15:00", 0));
+		
 		
 		while(option!=3) {
 			System.out.println("==============");
@@ -41,7 +39,6 @@ public class TenniseeMain {
 	}
 	public static void reserveSchedule() {
 		System.out.println("Reserving...\n\n\n");
-		
 	}
 
 }
