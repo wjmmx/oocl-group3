@@ -6,10 +6,12 @@ public class Schedule {
 	String day;
 	String fromHour;
 	String toHour;
+	int isReserve;
 	public Schedule(String day,String fromHour,String toHour) {
 		this.day = day;
 		this.fromHour = fromHour;
 		this.toHour = toHour;
+		isReserve=0;
 		
 	}
 	
