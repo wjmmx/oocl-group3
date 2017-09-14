@@ -15,6 +15,8 @@ public class Schedule {
 	boolean isReserved;
 	String courtCode;
 	
+	public Schedule() {}
+	
 	public Schedule(String code, String courtCode, String day,String fromHour,String toHour) {
 		this.day = day;
 		this.fromHour = fromHour;
