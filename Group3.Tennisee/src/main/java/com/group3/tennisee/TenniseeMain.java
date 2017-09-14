@@ -1,5 +1,9 @@
 package com.group3.tennisee;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.List;
 import java.util.Scanner;
 
 public class TenniseeMain {
@@ -95,8 +99,28 @@ public class TenniseeMain {
 	        }
 	    }
 	}
-	public static void reserveSchedule() {
-		
-	}
+	public static void reserveSchedule(List<Schedule> schedules) {
 
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String code="";
+		try {
+		System.out.println("Enter code to reserve schedule: ");
+			code = br.readLine();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		for(Schedule schedule : schedules) {
+			if(schedule.getCode().equals(code)) {
+				if(schedule.getIsReserve()==1) {
+					System.out.println("Schedule is already reserved, please select another option.");
+					break;
+				}
+				
+				schedule.setIsReserve(1);
+				System.out.println("Schedule has been successfully reserved.");
+				break;
+			}
+		}
+	}
 }
