@@ -8,11 +8,13 @@ import org.junit.Before;
 import org.junit.Test;
 
 import com.group3.tennisee.Schedule;
+import com.group3.tennisee.User;
 
 public class TestReservation {
+	ArrayList list;
 	@Before
 	public void createScheduleList() {
-		ArrayList list = new ArrayList();
+		list = new ArrayList();
 		
 		list.add(new Schedule("Monday","9:00","10:00"));
 		list.add(new Schedule("Monday","10:00","11:00"));
@@ -25,9 +27,9 @@ public class TestReservation {
 		Assert.assertEquals(Arrays.asList(), Schedule.getSchedules());
 	}
 	@Test
-	public void testCreateReservation() {
+	public void testReservation() {
 		//fail("Not yet implemented");
-		Assert.assertEquals(true, Schedule.reserveSchedules(new Schedule()));
+		Assert.assertEquals(true, User.reserveSchedules(list, "9:00", "10:00"));
 	}
 
 }

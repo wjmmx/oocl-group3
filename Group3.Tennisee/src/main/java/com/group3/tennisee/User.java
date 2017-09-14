@@ -1,5 +1,7 @@
 package com.group3.tennisee;
 
+import java.util.ArrayList;
+
 public class User {
 	
 	
@@ -38,6 +40,18 @@ public class User {
 	}
 	public void setLoc_id(int loc_id) {
 		this.loc_id = loc_id;
+	}
+	
+	public static Boolean reserveSchedules(ArrayList<Schedule> list, String from, String to) {
+		Boolean success = false;
+
+		for(Schedule l:list) {
+			if(l.getFromHour().equals(from) && l.getToHour().equals(to)) { 
+				success=true;
+				break;
+			};
+		}
+		return success;
 	}
 
 }

@@ -13,6 +13,14 @@ public class Schedule {
 		
 	}
 	
+	public String getFromHour() {
+		return fromHour;
+	}
+	
+	public String getToHour() {
+		return toHour;
+	}
+	
 	
 	public static ArrayList getSchedules() {
 		ArrayList list = new ArrayList();
@@ -20,10 +28,5 @@ public class Schedule {
 		return list;
 	}
 
-	public static Boolean reserveSchedules(Schedule sched) {
-		ArrayList list = new ArrayList();
-		Boolean success = false;
-		
-		return success;
-	}
+	
 }
