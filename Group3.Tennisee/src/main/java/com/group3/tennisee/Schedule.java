@@ -110,15 +110,12 @@ public class Schedule {
 		return "";
 	}
 	
-	public static boolean reserveSchedule(List<Schedule> schedules) {
+	public static boolean reserveSchedule(List<Schedule> schedules, String courtCode) {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String court="";
 		String code="";
 		
 		try {
-			System.out.println("\nEnter court code:");
-			court = br.readLine();
 			
 			System.out.println("\nEnter schedule code to reserve: ");
 			code = br.readLine();
@@ -127,7 +124,7 @@ public class Schedule {
 		}
 	
 		for(Schedule schedule : schedules) {
-			if(schedule.getCourtCode().equals(court) && schedule.getCode().equals(code)) {
+			if(schedule.getCourtCode().equals(courtCode) && schedule.getCode().equals(code)) {
 
 				long diffMinutes = Schedule.getTimeDiffInMinute(Schedule.getTimeDate(schedule.getFromHour()), Schedule.getTimeDate(getCurrentTime()));
 				

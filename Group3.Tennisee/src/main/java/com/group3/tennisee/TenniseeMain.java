@@ -11,7 +11,7 @@ public class TenniseeMain {
 	public static void main(String[] args) {
 		
 		int option = 0;
-		
+		String courtCode="";
 		banner();
 		
 
@@ -26,8 +26,9 @@ public class TenniseeMain {
 			option = scan.nextInt();
 			
 			if(option==1) {
+				courtCode = chooseCourt();
 				viewSchedules();
-				Schedule.reserveSchedule(new ArrayList<Schedule>());
+				Schedule.reserveSchedule(new ArrayList<Schedule>(), courtCode);
 			}
 			else if(option==2) {
 				login();
@@ -73,6 +74,19 @@ public class TenniseeMain {
 	
 	public static void verifyifPremiumUser(String username, String password) {
 		
+	}
+	
+	public static String chooseCourt() {
+		Scanner scan = new Scanner(System.in);
+		System.out.println("==================================================================");
+		System.out.println("||\tA\t||\tB\t||\tC\t||\tD\t||");
+		System.out.println("==================================================================");
+		System.out.println("||\tE\t||\tF\t||\tG\t||\tH\t||");
+		System.out.println("==================================================================");
+		System.out.println("Enter Court: ");
+		String court = scan.nextLine().toUpperCase();
+		System.out.println("\nCourt: " + court);
+		return court;
 	}
 	
 	public static void viewSchedules() {
