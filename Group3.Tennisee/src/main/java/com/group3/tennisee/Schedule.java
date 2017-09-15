@@ -3,7 +3,12 @@ package com.group3.tennisee;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -154,5 +159,38 @@ public class Schedule {
 			}
 		}
 		return status;
+	}
+	
+	public static Date getTimeDate(String time) {
+		Date date = null;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		if(!time.isEmpty()) {
+			try {
+				date = dateFormat.parse(time);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		return date;
+	}
+	
+	public static Boolean isWithinFifteenMinuteReservation(long min) {
+		if(min >= 15) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static String getCurrentTime() {
+		Calendar cal = new GregorianCalendar();
+		String currTime = cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
+		return currTime;
+	}
+	
+	public static long getTimeDiffInMinute(Date fromTime, Date currTime) {
+		long diff = 0;
+		diff = (fromTime.getTime() - currTime.getTime()) / (60*1000);
+		return diff;
 	}
 }
