@@ -144,6 +144,7 @@ public class Schedule {
 				schedule.setUserName(userName);
 				schedule.setIsReserved(true);
 				System.out.println("Schedule has been successfully reserved.");
+				scan.close();
 				return true;
 			}
 		}
