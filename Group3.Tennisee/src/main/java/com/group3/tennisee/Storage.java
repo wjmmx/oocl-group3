@@ -177,6 +177,24 @@ public class Storage {
 		else return resultList;
 	}
 	
+	public ArrayList<Schedule> getScheduleListByUserName(String userName) {
+		ArrayList<Schedule> resultList = new ArrayList<Schedule>();
+		for(Schedule s: this.scheduleList) {
+			if(userName.isEmpty()) {
+				System.out.println("Please enter a valid username");
+				return null;	
+			} 
+			else if(s.getUserName().equalsIgnoreCase(userName) && s.getIsReserved()) {
+					 resultList.add(s);
+			}
+		}
+		if(resultList.size() == 0) {
+			System.out.println("You have no reservations!");
+			return null;
+		}
+		else return resultList;
+	}
+	
 	public Schedule getScheduleListByCodeAndCourt(String code, String courtCode) {
 		Schedule sched = null;
 		for(Schedule s: getScheduleList()) {
