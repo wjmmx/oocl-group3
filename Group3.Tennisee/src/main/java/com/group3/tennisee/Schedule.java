@@ -110,8 +110,6 @@ public class Schedule {
 	}
 
 	public static boolean reserveSchedule(Schedule schedule) {
-
-		
 			long diffMinutes = Schedule.getTimeDiffInMinute(Schedule.getTimeDate(schedule.getFromHour()),
 					Schedule.getTimeDate(getCurrentTime()));
 
@@ -133,8 +131,32 @@ public class Schedule {
 			System.out.println("Schedule has been successfully reserved.");
 			//scan.close();
 			return true;
-		
+	}
+	
+	public static boolean reserveRecurringSchedule(ArrayList<Schedule> schedules) {
+		for(Schedule schedule : schedules) {
+			long diffMinutes = Schedule.getTimeDiffInMinute(Schedule.getTimeDate(schedule.getFromHour()),
+					Schedule.getTimeDate(getCurrentTime()));
 
+			if (schedule.getIsReserved()) {
+				System.out.println("Schedule is already reserved, please select another option.");
+				return false;
+			}
+
+			if (isWithinFifteenMinuteReservation(diffMinutes)) {
+				System.out.println("Reservation failed. Schedule must be reserved at least 15 minutes ahead of time.");
+				return false;
+			}
+			
+			Scanner scan = new Scanner(System.in);
+			System.out.println("Enter your username : ");
+			String userName = scan.nextLine();
+			schedule.setUserName(userName);
+			schedule.setIsReserved(true);
+			System.out.println("Schedule has been successfully reserved.");
+			//scan.close();
+		}
+		return true;
 	}
 
 	public static boolean courtCodeSchedule(String code) {

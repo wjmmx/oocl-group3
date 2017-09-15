@@ -17,6 +17,7 @@ public class TenniseeMain {
 	public static void main(String[] args) {
 		store = new Storage();
 		int option = 0;
+		int logOption = 0;
 		String courtCode = "";
 		banner();
 
@@ -30,6 +31,7 @@ public class TenniseeMain {
 				System.out.println("3] Exit");
 				System.out.print("Enter option: ");
 				option = scan.nextInt();
+				logOption = option;
 			}else {
 				System.out.println("==============");
 				System.out.println("OPTIONS:");
@@ -40,31 +42,57 @@ public class TenniseeMain {
 				System.out.println("4] Exit");
 				System.out.print("Enter option: ");
 				option = scan.nextInt();
+				logOption = option;
 			}
-			
-
-			if (option == 1) {
-				courtCode = chooseCourt();
-				Schedule sc = store.getScheduleListByCodeAndCourt(viewSchedules(courtCode), courtCode);
-				if(sc!=null) {
-					Schedule.reserveSchedule(sc);
+			if(currentUser == null) {
+				if (option == 1) {
+					courtCode = chooseCourt();
+					Schedule sc = store.getScheduleListByCodeAndCourt(viewSchedules(courtCode), courtCode);
+					if(sc!=null) {
+						Schedule.reserveSchedule(sc);
+					}
+					else {
+						System.out.println("Schedule not available!");
+					}
+				} else if (option == 2) {
+					login();
+				} else if (currentUser == null && option == 3) {
+					System.out.println("Goodbye!");
+				} else {
+					System.out.println("Invalid!");
 				}
-				else {
-					System.out.println("Schedule not available!");
+			}else {
+				if (logOption == 1) {
+					courtCode = "";
+					courtCode = chooseCourt();
+					Schedule sc = store.getScheduleListByCodeAndCourt(viewSchedules(courtCode), courtCode);
+					if(sc!=null) {
+						Schedule.reserveSchedule(sc);
+					}
+					else {
+						System.out.println("Schedule not available!");
+					}
+				} else if (logOption == 2) {
+					courtCode = "";
+					courtCode = chooseCourt();
+					ArrayList<Schedule> scList = store.getScheduleListByCourtCode(courtCode);
+					if(scList!=null) {
+						Schedule.reserveRecurringSchedule(scList);
+					}
+					else {
+						System.out.println("Schedule not available!");
+					}
+				} else if(currentUser != null && logOption == 3) {
+					currentUser = null;
+					option = 0;
+					logOption = option;
+				}else if (currentUser != null && logOption == 4) {
+					System.out.println("Goodbye!");
+				} else {
+					System.out.println("Invalid!");
 				}
-			} else if (option == 2) {
-				login();
-			} else if (currentUser == null && option == 3) {
-				System.out.println("Goodbye!");
-			} else if(currentUser != null && option == 3) {
-				currentUser = null;
-			}else if (currentUser != null && option == 4) {
-				System.out.println("Goodbye!");
-			} else {
-				System.out.println("Invalid!");
 			}
 		}
-
 	}
 
 	public static void banner() {
