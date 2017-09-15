@@ -124,7 +124,7 @@ public class Schedule {
 		}
 	
 		for(Schedule schedule : schedules) {
-			if(schedule.getCourtCode().equals(courtCode) && schedule.getCode().equals(code)) {
+			if(schedule.getCourtCode().equalsIgnoreCase(courtCode) && schedule.getCode().equalsIgnoreCase(code)) {
 
 				long diffMinutes = Schedule.getTimeDiffInMinute(Schedule.getTimeDate(schedule.getFromHour()), Schedule.getTimeDate(getCurrentTime()));
 				
