@@ -10,13 +10,10 @@ public class TenniseeMain {
 	static String username;
 	static String password;
 	static Storage store;
-<<<<<<< origin/master
 	static ArrayList<Schedule> schedule;
-=======
 	static UserStorage userStore = null;
 	static User currentUser = null;
 
->>>>>>> local
 	public static void main(String[] args) {
 		store = new Storage();
 		int option = 0;
