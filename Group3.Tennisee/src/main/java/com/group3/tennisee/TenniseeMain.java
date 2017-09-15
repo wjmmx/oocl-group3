@@ -11,21 +11,37 @@ public class TenniseeMain {
 	static String password;
 	static Storage store;
 	static ArrayList<Schedule> schedule;
+	static UserStorage userStore = null;
+	static User currentUser = null;
+
 	public static void main(String[] args) {
 		store = new Storage();
 		int option = 0;
 		String courtCode = "";
 		banner();
 
-		while (option != 3) {
-			System.out.println("==============");
-			System.out.println("OPTIONS:");
-			System.out.println("==============");
-			System.out.println("1] Reserve Schedule");
-			System.out.println("2] Login");
-			System.out.println("3] Exit");
-			System.out.print("Enter option: ");
-			option = scan.nextInt();
+		while ((option != 3 && currentUser != null) || (currentUser != null && option != 4)) {
+			if(currentUser == null) {
+				System.out.println("==============");
+				System.out.println("OPTIONS:");
+				System.out.println("==============");
+				System.out.println("1] Reserve Schedule");
+				System.out.println("2] Login");
+				System.out.println("3] Exit");
+				System.out.print("Enter option: ");
+				option = scan.nextInt();
+			}else {
+				System.out.println("==============");
+				System.out.println("OPTIONS:");
+				System.out.println("==============");
+				System.out.println("1] Reserve Schedule");
+				System.out.println("2] Recurring Reserve");
+				System.out.println("3] Logout");
+				System.out.println("4] Exit");
+				System.out.print("Enter option: ");
+				option = scan.nextInt();
+			}
+			
 
 			if (option == 1) {
 				courtCode = chooseCourt();
@@ -38,7 +54,11 @@ public class TenniseeMain {
 				}
 			} else if (option == 2) {
 				login();
-			} else if (option == 3) {
+			} else if (currentUser == null && option == 3) {
+				System.out.println("Goodbye!");
+			} else if(currentUser != null && option == 3) {
+				currentUser = null;
+			}else if (currentUser != null && option == 4) {
 				System.out.println("Goodbye!");
 			} else {
 				System.out.println("Invalid!");
@@ -74,17 +94,13 @@ public class TenniseeMain {
 	}
 
 	public static void login() {
-
+		userStore = new UserStorage();
+		scan = new Scanner(System.in);
 		System.out.println("Enter username: ");
 		username = scan.nextLine();
 		System.out.println("Enter password: ");
 		password = scan.nextLine();
-
-		verifyifPremiumUser(username, password);
-	}
-
-	public static void verifyifPremiumUser(String username, String password) {
-
+		currentUser = userStore.getPremiumUser(username, password);
 	}
 
 	public static String chooseCourt() {
