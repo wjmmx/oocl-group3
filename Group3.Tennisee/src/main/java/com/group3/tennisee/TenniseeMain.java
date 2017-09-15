@@ -128,7 +128,7 @@ public class TenniseeMain {
 				char dayChar = day[i].charAt(0);
 				if (dayChar == 'A' && schedule.get(j).getDay().equals("Monday")) {
 					if(schedule.get(j).getIsReserved()) {
-						System.out.print("\t----------");
+						System.out.print("\t-------------");
 					}
 					else {
 						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
