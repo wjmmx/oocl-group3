@@ -120,7 +120,7 @@ public class Schedule {
 				return false;
 			}
 
-			if (isWithinFifteenMinuteReservation(diffMinutes)) {
+			if (!isWithinFifteenMinuteReservation(diffMinutes)) {
 				System.out.println("Reservation failed. Schedule must be reserved at least 15 minutes ahead of time.");
 				return false;
 			}
