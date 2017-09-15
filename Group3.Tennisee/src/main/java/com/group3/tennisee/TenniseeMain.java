@@ -10,7 +10,7 @@ public class TenniseeMain {
 	static String username;
 	static String password;
 	static Storage store;
-
+	static ArrayList<Schedule> schedule;
 	public static void main(String[] args) {
 		store = new Storage();
 		int option = 0;
@@ -101,7 +101,7 @@ public class TenniseeMain {
 	}
 
 	public static String viewSchedules(String courtCode) {
-		Storage storage = new Storage();
+		//Storage storage = new Storage();
 		String[] day = { "A Monday\t|", "B Tuesday\t|", "C Wednesday\t|", "D Thursday\t|", "E Friday\t|",
 				"F Saturday\t|", "G Sunday\t|" };
 		String[] courtLetter = { "A", "B", "C", "D", "E", "F", "G", "H" };
@@ -121,31 +121,61 @@ public class TenniseeMain {
 			System.out.print("\t" + i + "\t"); // print the column number
 
 		}
-		ArrayList<Schedule> schedule = storage.getScheduleListByCourtCode(courtCode);
+		schedule = store.getScheduleListByCourtCode(courtCode);
 		for (int i = 0; i < a.length; i++) {
 			System.out.print("\n" + day[i]);
 			for (int j = 0; j < schedule.size(); j++) {
 				char dayChar = day[i].charAt(0);
 				if (dayChar == 'A' && schedule.get(j).getDay().equals("Monday")) {
-					if(schedule.get(j).isReserved) {
-						System.out.println("\t            ");
+					if(schedule.get(j).getIsReserved()) {
+						System.out.print("\t----------");
 					}
 					else {
 						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
 					}
 					
 				} else if (dayChar == 'B' && schedule.get(j).getDay().equals("Tuesday")) {
-					System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					if(schedule.get(j).getIsReserved()) {
+						System.out.print("\t\t");
+					}
+					else {
+						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					}
 				} else if (dayChar == 'C' && schedule.get(j).getDay().equals("Wednesday")) {
-					System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					if(schedule.get(j).getIsReserved()) {
+						System.out.print("\t\t");
+					}
+					else {
+						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					}
 				} else if (dayChar == 'D' && schedule.get(j).getDay().equals("Thursday")) {
-					System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					if(schedule.get(j).getIsReserved()) {
+						System.out.print("\t\t");
+					}
+					else {
+						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					}
 				} else if (dayChar == 'E' && schedule.get(j).getDay().equals("Friday")) {
-					System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					if(schedule.get(j).getIsReserved()) {
+						System.out.print("\t\t");
+					}
+					else {
+						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					}
 				} else if (dayChar == 'F' && schedule.get(j).getDay().equals("Saturday")) {
-					System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					if(schedule.get(j).getIsReserved()) {
+						System.out.print("\t\t");
+					}
+					else {
+						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					}
 				} else if (dayChar == 'G' && schedule.get(j).getDay().equals("Sunday")) {
-					System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					if(schedule.get(j).getIsReserved()) {
+						System.out.print("\t\t");
+					}
+					else {
+						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					}
 				}
 
 				/*
