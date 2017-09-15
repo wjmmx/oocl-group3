@@ -115,6 +115,7 @@ public class Schedule {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		String court="";
 		String code="";
+		
 		try {
 			System.out.println("\nEnter court code:");
 			court = br.readLine();
@@ -127,10 +128,18 @@ public class Schedule {
 	
 		for(Schedule schedule : schedules) {
 			if(schedule.getCourtCode().equals(court) && schedule.getCode().equals(code)) {
+
+				long diffMinutes = Schedule.getTimeDiffInMinute(Schedule.getTimeDate(schedule.getFromHour()), Schedule.getTimeDate(getCurrentTime()));
+				
 				if(schedule.getIsReserved()) {
 					System.out.println("Schedule is already reserved, please select another option.");
 					return false;
 				}
+				
+				if(isWithinFifteenMinuteReservation(diffMinutes)) {
+					System.out.println("Reservation failed. Schedule must be reserved at least 15 minutes ahead of time.");
+				}
+				
 				Scanner scan = new Scanner(System.in);
 				System.out.println("Enter your username : ");
 				String userName = scan.nextLine();
