@@ -3,7 +3,12 @@ package com.group3.tennisee;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Scanner;
 
@@ -108,16 +113,20 @@ public class Schedule {
 	public static boolean reserveSchedule(List<Schedule> schedules) {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String court="";
 		String code="";
 		try {
-		System.out.println("\nEnter code to reserve schedule: ");
+			System.out.println("\nEnter court code:");
+			court = br.readLine();
+			
+			System.out.println("\nEnter schedule code to reserve: ");
 			code = br.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+	
 		for(Schedule schedule : schedules) {
-			if(schedule.getCode().equals(code)) {
+			if(schedule.getCourtCode().equals(court) && schedule.getCode().equals(code)) {
 				if(schedule.getIsReserved()) {
 					System.out.println("Schedule is already reserved, please select another option.");
 					return false;
@@ -150,5 +159,38 @@ public class Schedule {
 			}
 		}
 		return status;
+	}
+	
+	public static Date getTimeDate(String time) {
+		Date date = null;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		if(!time.isEmpty()) {
+			try {
+				date = dateFormat.parse(time);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				return null;
+			}
+		}
+		return date;
+	}
+	
+	public static Boolean isWithinFifteenMinuteReservation(long min) {
+		if(min >= 15) {
+			return true;
+		}
+		return false;
+	}
+	
+	public static String getCurrentTime() {
+		Calendar cal = new GregorianCalendar();
+		String currTime = cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
+		return currTime;
+	}
+	
+	public static long getTimeDiffInMinute(Date fromTime, Date currTime) {
+		long diff = 0;
+		diff = (fromTime.getTime() - currTime.getTime()) / (60*1000);
+		return diff;
 	}
 }
