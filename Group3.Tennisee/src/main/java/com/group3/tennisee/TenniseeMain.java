@@ -127,7 +127,13 @@ public class TenniseeMain {
 			for (int j = 0; j < schedule.size(); j++) {
 				char dayChar = day[i].charAt(0);
 				if (dayChar == 'A' && schedule.get(j).getDay().equals("Monday")) {
-					System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					if(schedule.get(j).isReserved) {
+						System.out.println("\t            ");
+					}
+					else {
+						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
+					}
+					
 				} else if (dayChar == 'B' && schedule.get(j).getDay().equals("Tuesday")) {
 					System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
 				} else if (dayChar == 'C' && schedule.get(j).getDay().equals("Wednesday")) {
