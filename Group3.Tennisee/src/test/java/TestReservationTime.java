@@ -1,5 +1,6 @@
 import static org.junit.Assert.*;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -40,17 +41,9 @@ public class TestReservationTime {
 		Schedule sched = store.getScheduleListByCodeAndCourt(code, courtCode);
 		String fromTime = sched.getFromHour();
 		String currTime = "08:00";
-		SimpleDateFormat date = new SimpleDateFormat("HH:mm");
+		long diffMinutes = getTimeDiffInMinute(getTimeDate(fromTime), getTimeDate(currTime));
 		
-		try{
-			Date fromDate = date.parse(fromTime);
-			Date currDate = date.parse(currTime);
-			long diffMinutes = getTimeDiffInMinute(fromDate, currDate);
-			System.out.println(diffMinutes);
-			assertTrue(isWithinFifteenMinuteReservation(diffMinutes));
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		assertTrue(isWithinFifteenMinuteReservation(diffMinutes));
 	}
 	
 	@Test
@@ -61,17 +54,9 @@ public class TestReservationTime {
 		Schedule sched = store.getScheduleListByCodeAndCourt(code, courtCode);
 		String currTime = "10:48";
 		String fromTime = sched.getFromHour();
-		SimpleDateFormat date = new SimpleDateFormat("HH:mm");
+		long diffMinutes = getTimeDiffInMinute(getTimeDate(fromTime), getTimeDate(currTime));
 		
-		try{
-			Date fromDate = date.parse(fromTime);
-			Date currDate = date.parse(currTime);
-			long diffMinutes = getTimeDiffInMinute(fromDate, currDate);
-			
-			assertFalse(isWithinFifteenMinuteReservation(diffMinutes));
-		}catch(Exception e) {
-			e.printStackTrace();
-		}
+		assertFalse(isWithinFifteenMinuteReservation(diffMinutes));
 	}
 	
 	@Test
@@ -80,19 +65,26 @@ public class TestReservationTime {
 		courtCode = "A";
 		
 		Schedule sched = store.getScheduleListByCodeAndCourt(code, courtCode);
-		String currTime = getCurrentTime();
-		String fromTime = sched.getFromHour();
-		SimpleDateFormat date = new SimpleDateFormat("HH:mm");
-		
-		try{
-			Date fromDate = date.parse(fromTime);
-			Date currDate = date.parse(currTime);
-			long diffMinutes = getTimeDiffInMinute(fromDate, currDate);
+		String currTime = getCurrentTime(); //System time
+		String fromTime = sched.getFromHour(); //From schedule
+		long diffMinutes = getTimeDiffInMinute(getTimeDate(fromTime), getTimeDate(currTime));
 			
-			assertTrue(isWithinFifteenMinuteReservation(diffMinutes));
-		}catch(Exception e) {
-			e.printStackTrace();
+		assertTrue(isWithinFifteenMinuteReservation(diffMinutes));
+		
+	}
+	
+	public Date getTimeDate(String time) {
+		Date date = null;
+		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
+		if(!time.isEmpty()) {
+			try {
+				date = dateFormat.parse(time);
+			} catch (ParseException e) {
+				e.printStackTrace();
+				return null;
+			}
 		}
+		return date;
 	}
 	
 	public Boolean isWithinFifteenMinuteReservation(long min) {
