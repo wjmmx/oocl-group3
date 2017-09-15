@@ -21,21 +21,20 @@ public class Schedule {
 	boolean isReserved;
 	String courtCode;
 	String userName;
-	
 
+	public Schedule() {
+	}
 
-	public Schedule() {}
-	
-	public Schedule(String code, String courtCode, String day,String fromHour,String toHour) {
+	public Schedule(String code, String courtCode, String day, String fromHour, String toHour) {
 		this.day = day;
 		this.fromHour = fromHour;
 		this.toHour = toHour;
 		this.courtCode = courtCode;
 		this.code = code;
-		this.isReserved=false;
-		this.isPaid=false;	
+		this.isReserved = false;
+		this.isPaid = false;
 	}
-	
+
 	public String getUserName() {
 		return userName;
 	}
@@ -43,7 +42,7 @@ public class Schedule {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	
+
 	public String getCode() {
 		return code;
 	}
@@ -104,75 +103,59 @@ public class Schedule {
 		ArrayList list = new ArrayList();
 		return list;
 	}
-	
+
 	public static String reserveSchedule(String code) {
-		
+
 		return "";
 	}
-	
-	public static boolean reserveSchedule(List<Schedule> schedules, String courtCode) {
 
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String code="";
+	public static boolean reserveSchedule(Schedule schedule) {
+
 		
-		try {
-			
-			System.out.println("\nEnter schedule code to reserve: ");
-			code = br.readLine();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	
-		for(Schedule schedule : schedules) {
-			if(schedule.getCourtCode().equalsIgnoreCase(courtCode) && schedule.getCode().equalsIgnoreCase(code)) {
+			long diffMinutes = Schedule.getTimeDiffInMinute(Schedule.getTimeDate(schedule.getFromHour()),
+					Schedule.getTimeDate(getCurrentTime()));
 
-				long diffMinutes = Schedule.getTimeDiffInMinute(Schedule.getTimeDate(schedule.getFromHour()), Schedule.getTimeDate(getCurrentTime()));
-				
-				if(schedule.getIsReserved()) {
-					System.out.println("Schedule is already reserved, please select another option.");
-					return false;
-				}
-				
-				if(isWithinFifteenMinuteReservation(diffMinutes)) {
-					System.out.println("Reservation failed. Schedule must be reserved at least 15 minutes ahead of time.");
-					return false;
-				}
-				
-				Scanner scan = new Scanner(System.in);
-				System.out.println("Enter your username : ");
-				String userName = scan.nextLine();
-				schedule.setUserName(userName);
-				schedule.setIsReserved(true);
-				System.out.println("Schedule has been successfully reserved.");
-				scan.close();
-				return true;
+			if (schedule.getIsReserved()) {
+				System.out.println("Schedule is already reserved, please select another option.");
+				return false;
 			}
-		}
-		return false;
-	}
-	
-	public static boolean courtCodeSchedule(String code) {
-		boolean status=false;
-		String [] correctCode = {"A1","A2","A3", "A4", "A5", "A6", "A7",
-								"B1", "B2", "B3", "B4", "B5", "B6", "B7",
-								"C1", "C2", "C3", "C4", "C5", "C6", "C7",
-								"D1", "D2", "D3", "D4", "D5", "D6", "D7",
-								"E1", "E2", "E3", "E4", "E5", "E6", "E7",
-								"F1", "F2", "F3", "F4", "F5", "F6", "F7",
-								"G1", "G2", "G3", "G4", "G5", "G6", "G7"};
+
+			if (isWithinFifteenMinuteReservation(diffMinutes)) {
+				System.out.println("Reservation failed. Schedule must be reserved at least 15 minutes ahead of time.");
+				return false;
+			}
+
+			Scanner scan = new Scanner(System.in);
+			System.out.println("Enter your username : ");
+			String userName = scan.nextLine();
+			schedule.setUserName(userName);
+			schedule.setIsReserved(true);
+			System.out.println("Schedule has been successfully reserved.");
+			//scan.close();
+			return true;
 		
-		for(int i=0; i<correctCode.length; i++) {
-			if(code.equals(correctCode[i])) {
-				status =  true;
+
+	}
+
+	public static boolean courtCodeSchedule(String code) {
+		boolean status = false;
+		String[] correctCode = { "A1", "A2", "A3", "A4", "A5", "A6", "A7", "B1", "B2", "B3", "B4", "B5", "B6", "B7",
+				"C1", "C2", "C3", "C4", "C5", "C6", "C7", "D1", "D2", "D3", "D4", "D5", "D6", "D7", "E1", "E2", "E3",
+				"E4", "E5", "E6", "E7", "F1", "F2", "F3", "F4", "F5", "F6", "F7", "G1", "G2", "G3", "G4", "G5", "G6",
+				"G7" };
+
+		for (int i = 0; i < correctCode.length; i++) {
+			if (code.equals(correctCode[i])) {
+				status = true;
 			}
 		}
 		return status;
 	}
-	
+
 	public static Date getTimeDate(String time) {
 		Date date = null;
 		SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm");
-		if(!time.isEmpty()) {
+		if (!time.isEmpty()) {
 			try {
 				date = dateFormat.parse(time);
 			} catch (ParseException e) {
@@ -182,23 +165,23 @@ public class Schedule {
 		}
 		return date;
 	}
-	
+
 	public static Boolean isWithinFifteenMinuteReservation(long min) {
-		if(min >= 15) {
+		if (min >= 15) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public static String getCurrentTime() {
 		Calendar cal = new GregorianCalendar();
-		String currTime = cal.get(Calendar.HOUR_OF_DAY)+":"+cal.get(Calendar.MINUTE);
+		String currTime = cal.get(Calendar.HOUR_OF_DAY) + ":" + cal.get(Calendar.MINUTE);
 		return currTime;
 	}
-	
+
 	public static long getTimeDiffInMinute(Date fromTime, Date currTime) {
 		long diff = 0;
-		diff = (fromTime.getTime() - currTime.getTime()) / (60*1000);
+		diff = (fromTime.getTime() - currTime.getTime()) / (60 * 1000);
 		return diff;
 	}
 }
