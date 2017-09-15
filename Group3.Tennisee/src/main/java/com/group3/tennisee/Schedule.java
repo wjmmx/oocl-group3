@@ -108,16 +108,20 @@ public class Schedule {
 	public static boolean reserveSchedule(List<Schedule> schedules) {
 
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		String court="";
 		String code="";
 		try {
-		System.out.println("\nEnter code to reserve schedule: ");
+			System.out.println("\nEnter court code:");
+			court = br.readLine();
+			
+			System.out.println("\nEnter schedule code to reserve: ");
 			code = br.readLine();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		
+	
 		for(Schedule schedule : schedules) {
-			if(schedule.getCode().equals(code)) {
+			if(schedule.getCourtCode().equals(court) && schedule.getCode().equals(code)) {
 				if(schedule.getIsReserved()) {
 					System.out.println("Schedule is already reserved, please select another option.");
 					return false;
