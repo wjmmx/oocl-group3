@@ -56,12 +56,12 @@ public class TestReservationTime {
 		String fromTime = sched.getFromHour();
 		long diffMinutes = Schedule.getTimeDiffInMinute(Schedule.getTimeDate(fromTime), Schedule.getTimeDate(currTime));
 		
-		assertFalse(Schedule.isWithinFifteenMinuteReservation(diffMinutes));
+		assertTrue(!Schedule.isWithinFifteenMinuteReservation(diffMinutes));
 	}
 	
 	@Test
 	public void testIsFifteenMinute() {
-		code = "A1";
+		code = "A6";
 		courtCode = "A";
 		
 		Schedule sched = store.getScheduleListByCodeAndCourt(code, courtCode);
