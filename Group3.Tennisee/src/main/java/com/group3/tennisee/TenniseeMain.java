@@ -20,7 +20,7 @@ public class TenniseeMain {
 		String courtCode = "";
 		banner();
 
-		while ((option != 3 && currentUser != null) || (currentUser != null && option != 4)) {
+		while ((option != 3 && currentUser == null) || (currentUser != null && option != 4)) {
 			if(currentUser == null) {
 				System.out.println("==============");
 				System.out.println("OPTIONS:");
@@ -152,42 +152,42 @@ public class TenniseeMain {
 					
 				} else if (dayChar == 'B' && schedule.get(j).getDay().equals("Tuesday")) {
 					if(schedule.get(j).getIsReserved()) {
-						System.out.print("\t\t");
+						System.out.print("\t-------------");
 					}
 					else {
 						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
 					}
 				} else if (dayChar == 'C' && schedule.get(j).getDay().equals("Wednesday")) {
 					if(schedule.get(j).getIsReserved()) {
-						System.out.print("\t\t");
+						System.out.print("\t-------------");
 					}
 					else {
 						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
 					}
 				} else if (dayChar == 'D' && schedule.get(j).getDay().equals("Thursday")) {
 					if(schedule.get(j).getIsReserved()) {
-						System.out.print("\t\t");
+						System.out.print("\t-------------");
 					}
 					else {
 						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
 					}
 				} else if (dayChar == 'E' && schedule.get(j).getDay().equals("Friday")) {
 					if(schedule.get(j).getIsReserved()) {
-						System.out.print("\t\t");
+						System.out.print("\t-------------");
 					}
 					else {
 						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
 					}
 				} else if (dayChar == 'F' && schedule.get(j).getDay().equals("Saturday")) {
 					if(schedule.get(j).getIsReserved()) {
-						System.out.print("\t\t");
+						System.out.print("\t-------------");
 					}
 					else {
 						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
 					}
 				} else if (dayChar == 'G' && schedule.get(j).getDay().equals("Sunday")) {
 					if(schedule.get(j).getIsReserved()) {
-						System.out.print("\t\t");
+						System.out.print("\t-------------");
 					}
 					else {
 						System.out.print("\t" + schedule.get(j).getFromHour() + " - " + schedule.get(j).getToHour());
