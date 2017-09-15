@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Storage {
 	
 	ArrayList<Schedule> scheduleList;
-	String[] courts = {"A","B","C","D","E","F","G"};
+	String[] courts = {"A","B","C","D","E","F","G","H"};
 	
 	public Storage() {
 		this.scheduleList = new ArrayList<Schedule>();
