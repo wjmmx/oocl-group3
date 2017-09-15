@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Schedule {
 	String code;
@@ -14,7 +15,10 @@ public class Schedule {
 	boolean isPaid;
 	boolean isReserved;
 	String courtCode;
+	String userName;
 	
+
+
 	public Schedule() {}
 	
 	public Schedule(String code, String courtCode, String day,String fromHour,String toHour) {
@@ -25,6 +29,14 @@ public class Schedule {
 		this.code = code;
 		this.isReserved=false;
 		this.isPaid=false;	
+	}
+	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
 	}
 	
 	public String getCode() {
@@ -110,7 +122,10 @@ public class Schedule {
 					System.out.println("Schedule is already reserved, please select another option.");
 					return false;
 				}
-				
+				Scanner scan = new Scanner(System.in);
+				System.out.println("Enter your username : ");
+				String userName = scan.nextLine();
+				schedule.setUserName(userName);
 				schedule.setIsReserved(true);
 				System.out.println("Schedule has been successfully reserved.");
 				return true;
